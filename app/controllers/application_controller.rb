@@ -21,14 +21,22 @@ class ApplicationController < ActionController::Base
     def blank_payment_form
     render ({ :template => "calculation_templates/payment_form.html.erb"})
     end
+
     def blank_payment_results
       @num_apr = params.fetch("number_apr").to_f
-      @apr = @num_apr.round(4)
       @num_years = params.fetch("number_years").to_f
-      @years = @num_years.round(0)
       @num_principal = params.fetch("number_principal").to_f
-      @principal = @num_principal
-      @payment = "placeholder"
+     
+      @n = @num_years*12
+      @r = @num_apr/1200
+      @apr = @num_apr/12
+      @years = @num_years.round(0)
+      
+      @p_step_1 =@r*@num_principal
+      @p_step_2 = (1+@r)**(-@n)
+      @p_step_3 = 1-@p_step_2
+      @p_step_4 = @p_step_1/@p_step_3
+      @payment = @p_step_4.round(2)
     
     render ({ :template => "calculation_templates/payment_form_results.html.erb"})
     end

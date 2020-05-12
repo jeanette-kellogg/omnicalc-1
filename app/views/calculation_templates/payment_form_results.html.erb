@@ -4,7 +4,7 @@ Payment Results
 
 <dl>  
       <dt>APR</dt>
-      <dd> <%= @apr %> </dd>
+      <dd><%= number_to_percentage(@num_apr,precision: 4) %> </dd>
 </dl>
 
 <dl>  
@@ -13,11 +13,11 @@ Payment Results
 </dl>
 <dl>  
       <dt>Principal</dt>
-      <dd> <%= @principal%> </dd>
+      <dd> <%= @num_principal%> </dd>
 </dl>
 <dl>  
       <dt>Payment</dt>
-      <dd> <%= @payment%> </dd>
+      <dd> <%= number_to_currency(@payment)%> </dd>
 </dl>
 
 <a href="/payment/new">Calculate another payment</a>
